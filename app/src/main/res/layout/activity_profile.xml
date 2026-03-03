@@ -171,7 +171,7 @@
             <ImageView
                 android:layout_width="140dp"
                 android:layout_height="140dp"
-                android:src="@drawable/ic_person_desk"
+                android:src="@drawable/user_avatar"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="16dp"
                 android:scaleType="centerCrop"
