@@ -8,136 +8,19 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <!-- ===== BOTTOM NAVIGATION BAR (fixed to bottom) ===== -->
-    <LinearLayout
-        android:id="@+id/bottomNavContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="20dp">
-
-        <LinearLayout
-            android:layout_width="309dp"
-            android:layout_height="54dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/bottom_nav_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="2dp"
-            android:paddingEnd="16dp"
-            android:weightSum="5">
-
-            <!-- Home (Active) -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.6"
-                android:gravity="center"
-                android:paddingStart="1dp"
-                android:paddingEnd="12dp">
-
-                <LinearLayout
-                    android:layout_width="96dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/active_tab_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:contentDescription="Home"
-                        android:src="@drawable/ic_home" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:text="Home"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Dashboard -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:contentDescription="Dashboard"
-                    android:src="@drawable/ic_carbon_dash" />
-            </LinearLayout>
-
-            <!-- Tasks -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="25dp"
-                    android:contentDescription="Tasks"
-                    android:src="@drawable/ic_task" />
-            </LinearLayout>
-
-            <!-- Music -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Music"
-                    android:src="@drawable/ic_music" />
-            </LinearLayout>
-
-            <!-- Profile -->
-            <LinearLayout
-                android:id="@+id/navAbout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Profile"
-                    android:src="@drawable/ic_profile" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
     <!-- ===== MAIN SCROLLABLE CONTENT ===== -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavContainer"
         android:scrollbars="none"
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
 
             <!-- ===== GREETING HEADER ===== -->
             <RelativeLayout
@@ -145,11 +28,10 @@
                 android:layout_height="wrap_content"
                 android:minHeight="160dp"
                 android:paddingStart="20dp"
-                android:paddingTop="16dp"
+                android:paddingTop="50dp"
                 android:paddingEnd="0dp"
                 android:paddingBottom="0dp">
 
-                <!-- Greeting text (left side) -->
                 <LinearLayout
                     android:id="@+id/greetingText"
                     android:layout_width="wrap_content"
@@ -175,19 +57,20 @@
                         android:letterSpacing="-0.01" />
                 </LinearLayout>
 
-                <!-- Person at desk illustration (right side) -->
                 <ImageView
-                    android:layout_width="155dp"
-                    android:layout_height="155dp"
+                    android:layout_width="200dp"
+                    android:layout_height="171dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:src="@drawable/ic_person_desk"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginBottom="0dp"
+                    android:contentDescription="Person working at desk"
                     android:scaleType="fitEnd"
-                    android:contentDescription="Person working at desk" />
+                    android:src="@drawable/ic_person_desk" />
 
             </RelativeLayout>
 
-            <!-- ===== AI SUMMARY CARD ===== -->
+            <!-- AI Summary Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -208,7 +91,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp" />
 
-                <!-- Summary body text — bold words set via code in MainActivity -->
                 <TextView
                     android:id="@+id/tvAiSummary"
                     android:layout_width="match_parent"
@@ -228,7 +110,7 @@
                     android:textStyle="italic" />
             </LinearLayout>
 
-            <!-- ===== FOCUS TIMER CARD ===== -->
+            <!-- Focus Timer Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -249,14 +131,11 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- Timer Boxes Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="4">
-
-                    <!-- Days -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -264,7 +143,6 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="4dp">
-
                         <TextView
                             android:id="@+id/tvDays"
                             android:layout_width="match_parent"
@@ -275,7 +153,6 @@
                             android:textColor="#111111"
                             android:textSize="24sp"
                             android:textStyle="bold" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -285,8 +162,6 @@
                             android:textColor="#999999"
                             android:textSize="12sp" />
                     </LinearLayout>
-
-                    <!-- Hours -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -294,7 +169,6 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="4dp">
-
                         <TextView
                             android:id="@+id/tvHours"
                             android:layout_width="match_parent"
@@ -305,7 +179,6 @@
                             android:textColor="#111111"
                             android:textSize="24sp"
                             android:textStyle="bold" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -315,8 +188,6 @@
                             android:textColor="#999999"
                             android:textSize="12sp" />
                     </LinearLayout>
-
-                    <!-- Minutes -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -324,7 +195,6 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="4dp">
-
                         <TextView
                             android:id="@+id/tvMinutes"
                             android:layout_width="match_parent"
@@ -335,7 +205,6 @@
                             android:textColor="#111111"
                             android:textSize="24sp"
                             android:textStyle="bold" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -345,8 +214,6 @@
                             android:textColor="#999999"
                             android:textSize="12sp" />
                     </LinearLayout>
-
-                    <!-- Seconds -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -354,7 +221,6 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="4dp">
-
                         <TextView
                             android:id="@+id/tvSeconds"
                             android:layout_width="match_parent"
@@ -365,7 +231,6 @@
                             android:textColor="#111111"
                             android:textSize="24sp"
                             android:textStyle="bold" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -375,11 +240,9 @@
                             android:textColor="#999999"
                             android:textSize="12sp" />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- ===== START FOCUS TIME BUTTON ===== -->
             <TextView
                 android:id="@+id/btnStartFocus"
                 android:layout_width="match_parent"
@@ -396,7 +259,6 @@
                 android:clickable="true"
                 android:focusable="true" />
 
-            <!-- ===== MOTIVATION HEADER ===== -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -407,12 +269,114 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <!-- Spacer at bottom -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- ===== BOTTOM NAVIGATION BAR ===== -->
+    <LinearLayout
+        android:id="@+id/bottomNavContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal"
+        android:paddingBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="309dp"
+            android:layout_height="54dp"
+            android:background="@drawable/bottom_nav_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="2dp"
+            android:paddingEnd="16dp"
+            android:weightSum="5">
+
+            <!-- Home (Active) -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:gravity="center"
+                android:paddingStart="1dp"
+                android:paddingEnd="12dp">
+                <LinearLayout
+                    android:layout_width="96dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/active_tab_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="Home"
+                        android:src="@drawable/ic_home" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="Home"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Dashboard"
+                    android:src="@drawable/ic_carbon_dash" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="Tasks"
+                    android:src="@drawable/ic_task" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Music"
+                    android:src="@drawable/ic_music" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navAbout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Profile"
+                    android:src="@drawable/ic_profile" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

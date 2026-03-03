@@ -15,5 +15,11 @@ public class ProfileActivity extends AppCompatActivity {
             intent.setFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         });
+
+        // Edit Profile button click: open EditProfileActivity
+        findViewById(R.id.btnEditProfile).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        });
     }
 }
