@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 timerHandler.removeCallbacks(timerRunnable);
             }
         });
+        // navAbout click: open ProfileActivity
+        findViewById(R.id.navAbout).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
     }
 
     /**

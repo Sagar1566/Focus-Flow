@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".ProfileActivity">
+
+    <!-- ===== BOTTOM NAVIGATION BAR ===== -->
+    <LinearLayout
+        android:id="@+id/bottomNavContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="309dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bottom_nav_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="2dp"
+            android:paddingEnd="16dp"
+            android:weightSum="5">
+
+            <!-- Home -->
+            <LinearLayout
+                android:id="@+id/navHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Home"
+                    android:src="@drawable/ic_home" />
+            </LinearLayout>
+
+            <!-- Dashboard -->
+            <LinearLayout
+                android:id="@+id/navDashboard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Dashboard"
+                    android:src="@drawable/ic_carbon_dash" />
+            </LinearLayout>
+
+            <!-- Tasks -->
+            <LinearLayout
+                android:id="@+id/navTasks"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="Tasks"
+                    android:src="@drawable/ic_task" />
+            </LinearLayout>
+
+            <!-- Music -->
+            <LinearLayout
+                android:id="@+id/navMusic"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Music"
+                    android:src="@drawable/ic_music" />
+            </LinearLayout>
+
+            <!-- About (Active) -->
+            <LinearLayout
+                android:id="@+id/navAbout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:gravity="center"
+                android:paddingStart="1dp"
+                android:paddingEnd="12dp">
+
+                <LinearLayout
+                    android:layout_width="96dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/active_tab_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="About"
+                        android:src="@drawable/ic_profile" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="About"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavContainer"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center_horizontal">
+
+            <!-- HEADER ROW -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:textColor="#000000"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/focus_flow"
+                    android:contentDescription="App Logo" />
+            </RelativeLayout>
+
+            <!-- AVATAR -->
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_person_desk"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Avatar" />
+
+            <!-- USER INFO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ruturaj Nakshane"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ruturaj@mail.com"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="6dp" />
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_checkmark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+91 9021061468"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="6dp" />
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_checkmark" />
+            </LinearLayout>
+
+            <!-- EDIT PROFILE BUTTON -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edit_profile_btn_bg"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <!-- ACHIEVEMENT LOGO SECTION -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Achievement"
+                android:textColor="#404040"
+                android:textSize="32sp"
+                android:layout_marginBottom="30dp" />
+
+            <!-- CARDS GRID -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="40dp">
+
+                <!-- CARD 1 -->
+                <LinearLayout
+                    android:layout_width="95dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/achievement_card_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_moon"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5h 30m"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Concentration"
+                        android:textColor="#E0E0E0"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- CARD 2 -->
+                <LinearLayout
+                    android:layout_width="95dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/achievement_card_light_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_z"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1h 10m"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Meditation"
+                        android:textColor="#F0F0F0"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- CARD 3 -->
+                <LinearLayout
+                    android:layout_width="95dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/achievement_card_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10 m"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Deep Breath"
+                        android:textColor="#E0E0E0"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
