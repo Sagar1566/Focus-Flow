@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Outer Box -->
+    <path
+        android:strokeColor="#AAAAAA"
+        android:strokeWidth="2.0"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M6,3.5 h12 c1.1,0 2,0.9 2,2 v13 c0,1.1 -0.9,2 -2,2 H6 c-1.1,0 -2,-0.9 -2,-2 v-13 c0,-1.1 0.9,-2 2,-2 z" />
+
+    <!-- Top Divider -->
+    <path
+        android:strokeColor="#AAAAAA"
+        android:strokeWidth="2.0"
+        android:pathData="M4,9.5 h16" />
+
+    <!-- Vertical Top Divider -->
+    <path
+        android:strokeColor="#AAAAAA"
+        android:strokeWidth="2.0"
+        android:pathData="M10,3.5 v6" />
+
+    <!-- Circular Pie Arc (bottom left) -->
+    <!-- Starts at top, goes CCW to right side -->
+    <path
+        android:strokeColor="#AAAAAA"
+        android:strokeWidth="2.0"
+        android:fillColor="#00000000"
+        android:pathData="M 9.5,13.5 A 2.2,2.2 0 1,0 12,16" />
+
+    <!-- Tall Bar -->
+    <path
+        android:strokeColor="#AAAAAA"
+        android:strokeWidth="2.0"
+        android:pathData="M15,13.5 v5.5" />
+    
+    <!-- Short Bar -->
+    <path
+        android:strokeColor="#AAAAAA"
+        android:strokeWidth="2.0"
+        android:pathData="M18,15.8 v3.2" />
+
+</vector>
