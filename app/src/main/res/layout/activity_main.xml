@@ -12,6 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavContainer"
         android:scrollbars="none"
         android:overScrollMode="never"
         android:fillViewport="true">
@@ -277,24 +278,23 @@
     </ScrollView>
 
     <!-- ===== BOTTOM NAVIGATION BAR ===== -->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/bottomNavContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
-        android:gravity="center_horizontal"
-        android:paddingBottom="30dp">
+        android:layout_height="90dp"
+        android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:id="@+id/bottomNavMenu"
             android:layout_width="340dp"
             android:layout_height="64dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bottom_nav_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:animateLayoutChanges="true"
             android:weightSum="5">
 
@@ -303,7 +303,7 @@
                 android:id="@+id/navHome"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_weight="1.4"
+                android:layout_weight="1.8"
                 android:background="@drawable/active_tab_bg"
                 android:gravity="center"
                 android:paddingStart="12dp"
@@ -333,7 +333,7 @@
                 android:id="@+id/navDashboard"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_weight="0.9"
+                android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
@@ -362,7 +362,7 @@
                 android:id="@+id/navPlanner"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_weight="0.9"
+                android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
@@ -391,7 +391,7 @@
                 android:id="@+id/navMusic"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_weight="0.9"
+                android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
@@ -420,7 +420,7 @@
                 android:id="@+id/navAbout"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_weight="0.9"
+                android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
@@ -444,6 +444,6 @@
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

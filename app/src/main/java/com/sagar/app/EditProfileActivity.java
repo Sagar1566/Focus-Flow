@@ -14,11 +14,19 @@ public class EditProfileActivity extends AppCompatActivity {
             android.content.Intent intent = new android.content.Intent(EditProfileActivity.this, MainActivity.class);
             intent.setFlags(android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
 
         // navAbout/navProfile click: return to ProfileActivity
         findViewById(R.id.navAbout).setOnClickListener(v -> {
             finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

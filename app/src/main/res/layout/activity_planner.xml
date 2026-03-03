@@ -1,147 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/more_dashbo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <!-- ===== MAIN CONTENT ===== -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavContainer"
-        android:clipToPadding="false"
-        android:paddingBottom="20dp">
+        android:scrollbars="none"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="24dp">
 
             <!-- Header -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="32dp">
 
                 <TextView
-                    android:id="@+id/tvDashboardTitle"
+                    android:id="@+id/tvPlannerTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dashboard's"
-                    android:textColor="#121417"
-                    android:textSize="40sp"
+                    android:text="Planer"
+                    android:textColor="#000000"
+                    android:textSize="48sp"
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/focus_flow" />
-
+                    android:src="@drawable/ic_planner_logo"
+                    android:tint="#121417" />
             </RelativeLayout>
 
-            <!-- Stats Tab -->
+            <!-- Today's Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="40dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
 
-                <LinearLayout
-                    android:layout_width="197dp"
-                    android:layout_height="37dp"
-                    android:background="@drawable/stats_tab_bg"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/task_badge_bg"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="Task"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="Today's , 14 Mar 2025"
+                    android:textColor="#121417"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Active Tasks -->
+            <LinearLayout
+                android:id="@+id/activeTasksContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include 
+                    android:id="@+id/task1"
+                    layout="@layout/item_planner_task" />
+                <include 
+                    android:id="@+id/task2"
+                    layout="@layout/item_planner_task" />
+                <include 
+                    android:id="@+id/task3"
+                    layout="@layout/item_planner_task" />
+                <include 
+                    android:id="@+id/task4"
+                    layout="@layout/item_planner_task" />
+                <include 
+                    android:id="@+id/task5"
+                    layout="@layout/item_planner_task" />
+
+            </LinearLayout>
+
+            <!-- Completed Section Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/task_badge_bg"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Completed"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Completed Tasks -->
+            <LinearLayout
+                android:id="@+id/completedTasksContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include 
+                    android:id="@+id/comp1"
+                    layout="@layout/item_planner_task_completed" />
+                <include 
+                    android:id="@+id/comp2"
+                    layout="@layout/item_planner_task_completed" />
+                <include 
+                    android:id="@+id/comp3"
+                    layout="@layout/item_planner_task_completed" />
+                <include 
+                    android:id="@+id/comp4"
+                    layout="@layout/item_planner_task_completed" />
+                <include 
+                    android:id="@+id/comp5"
+                    layout="@layout/item_planner_task_completed" />
+                <include 
+                    android:id="@+id/comp6"
+                    layout="@layout/item_planner_task_completed" />
+                <include 
+                    android:id="@+id/comp7"
+                    layout="@layout/item_planner_task_completed" />
+
+            </LinearLayout>
+
+            <!-- Timeline Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="80dp">
+
+                <!-- Timeline Item 1 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    
+                    <View
+                        android:id="@+id/topDot"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/profile_bg_circle"
+                        android:backgroundTint="#121417" />
+                    
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/topDot"
+                        android:layout_centerHorizontal="false"
+                        android:layout_marginStart="3dp"
+                        android:background="#DBE0E6" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="STATS"
-                        android:textColor="#616161"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.1" />
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/topDot"
+                        android:layout_marginStart="16dp"
+                        android:text="Completed \&quot;Complete design mockups\&quot;"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
+                <!-- Timeline Item 2 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+                    
                     <View
-                        android:layout_width="173dp"
-                        android:layout_height="3dp"
-                        android:background="#000000"
-                        android:layout_marginBottom="3dp" />
-                </LinearLayout>
+                        android:id="@+id/bottomDot"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/profile_bg_circle"
+                        android:backgroundTint="#121417" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/bottomDot"
+                        android:layout_marginStart="16dp"
+                        android:text="Completed \&quot;Call with John at 2pm\&quot;"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
             </LinearLayout>
-
-            <!-- Feb Stats Section -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Feb 4th Week's Stats"
-                    android:textColor="#505050"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="Show All"
-                    android:textColor="#121417"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Bar Chart placeholder (custom implementation) -->
-            <include layout="@layout/view_bar_chart_heavy" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
-
-            <!-- Jan Stats Section -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jan 4th Week's Stats"
-                    android:textColor="#505050"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="Show All"
-                    android:textColor="#121417"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Light Bar Chart -->
-            <include layout="@layout/view_bar_chart_light" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Container -->
+    <!-- Create Button -->
+    <LinearLayout
+        android:id="@+id/btnCreateTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomNavContainer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/btn_dark_bg"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create +"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- ===== BOTTOM NAVIGATION BAR ===== -->
     <RelativeLayout
         android:id="@+id/bottomNavContainer"
         android:layout_width="match_parent"
@@ -156,10 +247,11 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/bottom_nav_bg"
             android:gravity="center_vertical"
-            android:animateLayoutChanges="true"
             android:orientation="horizontal"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp">
+            android:paddingEnd="12dp"
+            android:animateLayoutChanges="true"
+            android:weightSum="5">
 
             <!-- Home -->
             <LinearLayout
@@ -219,15 +311,16 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <!-- Planner -->
+            <!-- Planner (Active) -->
             <LinearLayout
                 android:id="@+id/navPlanner"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_weight="0.8"
+                android:layout_weight="1.8"
+                android:background="@drawable/active_tab_bg"
                 android:gravity="center"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:clickable="true"
                 android:focusable="true">
                 <ImageView
@@ -235,7 +328,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_task"
-                    android:tint="#888888" />
+                    android:tint="#FFFFFF" />
                 <TextView
                     android:id="@+id/tvPlannerLabel"
                     android:layout_width="wrap_content"
@@ -245,7 +338,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
             </LinearLayout>
 
             <!-- Music -->
@@ -307,4 +400,5 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+
 </RelativeLayout>

@@ -1,11 +1,10 @@
 package com.sagar.app;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,9 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DashboardActivity extends AppCompatActivity {
+public class PlannerActivity extends AppCompatActivity {
 
-    private ViewGroup bottomNavMenu;
     private LinearLayout navHome, navDashboard, navPlanner, navMusic, navAbout;
     private ImageView ivHome, ivDashboard, ivPlanner, ivMusic, ivAbout;
     private TextView tvHomeLabel, tvDashboardLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
@@ -23,10 +21,50 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_planner);
 
-        // Bind navigation views
-        bottomNavMenu = findViewById(R.id.bottomNavMenu);
+        // Hide action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        initializeViews();
+        setTaskNames();
+        setupBottomNavigation();
+        setActiveNavItem(navPlanner);
+    }
+
+    private void setTaskNames() {
+        ((TextView) findViewById(R.id.task1).findViewById(R.id.tvTaskName)).setText("Complete NPTEL Assignment");
+        ((TextView) findViewById(R.id.task2).findViewById(R.id.tvTaskName)).setText("Go to GYM and do Leg's");
+        ((TextView) findViewById(R.id.task3).findViewById(R.id.tvTaskName))
+                .setText("Register for Solution and Challenge.");
+        ((TextView) findViewById(R.id.task4).findViewById(R.id.tvTaskName)).setText("Complete NPTEL Assignment");
+        ((TextView) findViewById(R.id.task5).findViewById(R.id.tvTaskName)).setText("Complete NPTEL Assignment");
+
+        ((TextView) findViewById(R.id.comp1).findViewById(R.id.tvTaskName)).setText("Send to Adarsh 100$");
+        ((TextView) findViewById(R.id.comp2).findViewById(R.id.tvTaskName)).setText("call to prit");
+        ((TextView) findViewById(R.id.comp3).findViewById(R.id.tvTaskName)).setText("To cook Panner Masala");
+        ((TextView) findViewById(R.id.comp4).findViewById(R.id.tvTaskName)).setText("Tomorrow is birthday of Sejal");
+        ((TextView) findViewById(R.id.comp5).findViewById(R.id.tvTaskName)).setText("Watching movie with friend");
+        ((TextView) findViewById(R.id.comp6).findViewById(R.id.tvTaskName)).setText("Go to D-mart.");
+        ((TextView) findViewById(R.id.comp7).findViewById(R.id.tvTaskName)).setText("Wash your college uniform");
+
+        // Apply strike-through for completed tasks
+        strikeThrough((TextView) findViewById(R.id.comp1).findViewById(R.id.tvTaskName));
+        strikeThrough((TextView) findViewById(R.id.comp2).findViewById(R.id.tvTaskName));
+        strikeThrough((TextView) findViewById(R.id.comp3).findViewById(R.id.tvTaskName));
+        strikeThrough((TextView) findViewById(R.id.comp4).findViewById(R.id.tvTaskName));
+        strikeThrough((TextView) findViewById(R.id.comp5).findViewById(R.id.tvTaskName));
+        strikeThrough((TextView) findViewById(R.id.comp6).findViewById(R.id.tvTaskName));
+        strikeThrough((TextView) findViewById(R.id.comp7).findViewById(R.id.tvTaskName));
+    }
+
+    private void strikeThrough(TextView tv) {
+        tv.setPaintFlags(tv.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+    }
+
+    private void initializeViews() {
         navHome = findViewById(R.id.navHome);
         navDashboard = findViewById(R.id.navDashboard);
         navPlanner = findViewById(R.id.navPlanner);
@@ -44,48 +82,45 @@ public class DashboardActivity extends AppCompatActivity {
         tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
         tvMusicLabel = findViewById(R.id.tvMusicLabel);
         tvAboutLabel = findViewById(R.id.tvAboutLabel);
-
-        setupBottomNavigation();
-
-        // Set Dashboard as active
-        setActiveNavItem(navDashboard);
     }
 
     private void setupBottomNavigation() {
         navHome.setOnClickListener(v -> {
             setActiveNavItem(navHome);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(DashboardActivity.this, MainActivity.class);
+                Intent intent = new Intent(PlannerActivity.this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }, 200);
         });
-        navDashboard.setOnClickListener(v -> setActiveNavItem(navDashboard));
-        navPlanner.setOnClickListener(v -> {
-            setActiveNavItem(navPlanner);
+
+        navDashboard.setOnClickListener(v -> {
+            setActiveNavItem(navDashboard);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(DashboardActivity.this,
-                        PlannerActivity.class);
+                Intent intent = new Intent(PlannerActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }, 200);
         });
+
+        navPlanner.setOnClickListener(v -> setActiveNavItem(navPlanner));
+
         navMusic.setOnClickListener(v -> {
             setActiveNavItem(navMusic);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(DashboardActivity.this, MusicActivity.class);
+                Intent intent = new Intent(PlannerActivity.this, MusicActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }, 200);
         });
+
         navAbout.setOnClickListener(v -> {
             setActiveNavItem(navAbout);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(DashboardActivity.this,
-                        ProfileActivity.class);
+                Intent intent = new Intent(PlannerActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -93,25 +128,18 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        android.content.Intent intent = new android.content.Intent(this, MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finish();
-    }
-
     private void setActiveNavItem(LinearLayout activeItem) {
-        TransitionManager.beginDelayedTransition(bottomNavMenu, new AutoTransition().setDuration(250));
-
+        // Reset all items
         resetNavItem(navHome, ivHome, tvHomeLabel);
         resetNavItem(navDashboard, ivDashboard, tvDashboardLabel);
         resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
         resetNavItem(navMusic, ivMusic, tvMusicLabel);
         resetNavItem(navAbout, ivAbout, tvAboutLabel);
 
+        // Set active item
         activeItem.setBackgroundResource(R.drawable.active_tab_bg);
-        activeItem.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.8f));
+        activeItem.setLayoutParams(new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 1.8f));
 
         if (activeItem == navHome) {
             ivHome.setColorFilter(Color.WHITE);
@@ -133,8 +161,18 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void resetNavItem(LinearLayout item, ImageView iv, TextView tv) {
         item.setBackground(null);
-        item.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0.8f));
+        item.setLayoutParams(new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 0.8f));
         iv.setColorFilter(Color.parseColor("#888888"));
         tv.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(PlannerActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
     }
 }

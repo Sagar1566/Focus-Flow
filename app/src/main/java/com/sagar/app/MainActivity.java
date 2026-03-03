@@ -94,15 +94,35 @@ public class MainActivity extends AppCompatActivity {
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 android.content.Intent intent = new android.content.Intent(MainActivity.this, DashboardActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
             }, 200);
         });
-        navPlanner.setOnClickListener(v -> setActiveNavItem(navPlanner));
-        navMusic.setOnClickListener(v -> setActiveNavItem(navMusic));
+        navPlanner.setOnClickListener(v -> {
+            setActiveNavItem(navPlanner);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, PlannerActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }, 200);
+        });
+        navMusic.setOnClickListener(v -> {
+            setActiveNavItem(navMusic);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, MusicActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }, 200);
+        });
         navAbout.setOnClickListener(v -> {
             setActiveNavItem(navAbout);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 android.content.Intent intent = new android.content.Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
             }, 200);
         });
     }
