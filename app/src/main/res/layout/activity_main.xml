@@ -287,94 +287,161 @@
         android:paddingBottom="30dp">
 
         <LinearLayout
-            android:layout_width="309dp"
-            android:layout_height="54dp"
+            android:id="@+id/bottomNavMenu"
+            android:layout_width="340dp"
+            android:layout_height="64dp"
             android:background="@drawable/bottom_nav_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="2dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:animateLayoutChanges="true"
             android:weightSum="5">
 
             <!-- Home (Active) -->
             <LinearLayout
+                android:id="@+id/navHome"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.6"
+                android:layout_height="48dp"
+                android:layout_weight="1.4"
+                android:background="@drawable/active_tab_bg"
                 android:gravity="center"
-                android:paddingStart="1dp"
-                android:paddingEnd="12dp">
-                <LinearLayout
-                    android:layout_width="96dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/active_tab_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:contentDescription="Home"
-                        android:src="@drawable/ic_home" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:text="Home"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:contentDescription="Dashboard"
-                    android:src="@drawable/ic_carbon_dash" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="25dp"
-                    android:contentDescription="Tasks"
-                    android:src="@drawable/ic_task" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Music"
-                    android:src="@drawable/ic_music" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navAbout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:clickable="true"
                 android:focusable="true">
                 <ImageView
+                    android:id="@+id/ivHome"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="Profile"
-                    android:src="@drawable/ic_profile" />
+                    android:src="@drawable/ic_home"
+                    android:tint="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvHomeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Home"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <!-- Dashboard -->
+            <LinearLayout
+                android:id="@+id/navDashboard"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.9"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivDashboard"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_carbon_dash"
+                    android:tint="#888888" />
+                <TextView
+                    android:id="@+id/tvDashboardLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Dashboard"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Planner (formerly Tasks) -->
+            <LinearLayout
+                android:id="@+id/navPlanner"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.9"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivPlanner"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_task"
+                    android:tint="#888888" />
+                <TextView
+                    android:id="@+id/tvPlannerLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Planner"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Music -->
+            <LinearLayout
+                android:id="@+id/navMusic"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.9"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivMusic"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_music"
+                    android:tint="#888888" />
+                <TextView
+                    android:id="@+id/tvMusicLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Music"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- About (formerly Profile) -->
+            <LinearLayout
+                android:id="@+id/navAbout"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.9"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivAbout"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_profile"
+                    android:tint="#888888" />
+                <TextView
+                    android:id="@+id/tvAboutLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="About"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

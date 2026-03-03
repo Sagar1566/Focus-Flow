@@ -12,31 +12,56 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvDays, tvHours, tvMinutes, tvSeconds, btnStartFocus;
-    private Handler timerHandler;
-    private Runnable timerRunnable;
-
-    // Track elapsed seconds since focus started
+    private android.widget.TextView tvDays, tvHours, tvMinutes, tvSeconds, btnStartFocus;
+    private android.os.Handler timerHandler;
+    private java.lang.Runnable timerRunnable;
     private long elapsedSeconds = 0;
     private boolean isRunning = false;
+
+    private android.view.ViewGroup bottomNavMenu;
+    private android.widget.LinearLayout navHome, navDashboard, navPlanner, navMusic, navAbout;
+    private android.widget.ImageView ivHome, ivDashboard, ivPlanner, ivMusic, ivAbout;
+    private android.widget.TextView tvHomeLabel, tvDashboardLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Bind views
-        tvDays    = findViewById(R.id.tvDays);
-        tvHours   = findViewById(R.id.tvHours);
+        // Bind timer views
+        tvDays = findViewById(R.id.tvDays);
+        tvHours = findViewById(R.id.tvHours);
         tvMinutes = findViewById(R.id.tvMinutes);
         tvSeconds = findViewById(R.id.tvSeconds);
         btnStartFocus = findViewById(R.id.btnStartFocus);
+
+        // Bind navigation views
+        bottomNavMenu = findViewById(R.id.bottomNavMenu);
+        navHome = findViewById(R.id.navHome);
+        navDashboard = findViewById(R.id.navDashboard);
+        navPlanner = findViewById(R.id.navPlanner);
+        navMusic = findViewById(R.id.navMusic);
+        navAbout = findViewById(R.id.navAbout);
+
+        ivHome = findViewById(R.id.ivHome);
+        ivDashboard = findViewById(R.id.ivDashboard);
+        ivPlanner = findViewById(R.id.ivPlanner);
+        ivMusic = findViewById(R.id.ivMusic);
+        ivAbout = findViewById(R.id.ivAbout);
+
+        tvHomeLabel = findViewById(R.id.tvHomeLabel);
+        tvDashboardLabel = findViewById(R.id.tvDashboardLabel);
+        tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
+        tvMusicLabel = findViewById(R.id.tvMusicLabel);
+        tvAboutLabel = findViewById(R.id.tvAboutLabel);
+
+        setupBottomNavigation();
 
         // Set AI Summary text with bold keywords
         setupAiSummary();
 
         // Set up timer handler
-        timerHandler  = new Handler(Looper.getMainLooper());
+        timerHandler = new Handler(Looper.getMainLooper());
         timerRunnable = new Runnable() {
             @Override
             public void run() {
@@ -60,19 +85,78 @@ public class MainActivity extends AppCompatActivity {
                 timerHandler.removeCallbacks(timerRunnable);
             }
         });
-        // navAbout click: open ProfileActivity
-        findViewById(R.id.navAbout).setOnClickListener(v -> {
-            android.content.Intent intent = new android.content.Intent(MainActivity.this, ProfileActivity.class);
-            startActivity(intent);
+    }
+
+    private void setupBottomNavigation() {
+        navHome.setOnClickListener(v -> setActiveNavItem(navHome));
+        navDashboard.setOnClickListener(v -> {
+            setActiveNavItem(navDashboard);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, DashboardActivity.class);
+                startActivity(intent);
+            }, 200);
         });
+        navPlanner.setOnClickListener(v -> setActiveNavItem(navPlanner));
+        navMusic.setOnClickListener(v -> setActiveNavItem(navMusic));
+        navAbout.setOnClickListener(v -> {
+            setActiveNavItem(navAbout);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }, 200);
+        });
+    }
+
+    private void setActiveNavItem(android.widget.LinearLayout activeItem) {
+        // Prepare for animation
+        android.transition.TransitionManager.beginDelayedTransition(bottomNavMenu,
+                new android.transition.AutoTransition().setDuration(250));
+
+        // Reset all items
+        resetNavItem(navHome, ivHome, tvHomeLabel);
+        resetNavItem(navDashboard, ivDashboard, tvDashboardLabel);
+        resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
+        resetNavItem(navMusic, ivMusic, tvMusicLabel);
+        resetNavItem(navAbout, ivAbout, tvAboutLabel);
+
+        // Set active item
+        activeItem.setBackgroundResource(R.drawable.active_tab_bg);
+        activeItem.setLayoutParams(new android.widget.LinearLayout.LayoutParams(0,
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT, 1.8f)); // Balanced width for label
+
+        if (activeItem == navHome) {
+            ivHome.setColorFilter(android.graphics.Color.WHITE);
+            tvHomeLabel.setVisibility(android.view.View.VISIBLE);
+        } else if (activeItem == navDashboard) {
+            ivDashboard.setColorFilter(android.graphics.Color.WHITE);
+            tvDashboardLabel.setVisibility(android.view.View.VISIBLE);
+        } else if (activeItem == navPlanner) {
+            ivPlanner.setColorFilter(android.graphics.Color.WHITE);
+            tvPlannerLabel.setVisibility(android.view.View.VISIBLE);
+        } else if (activeItem == navMusic) {
+            ivMusic.setColorFilter(android.graphics.Color.WHITE);
+            tvMusicLabel.setVisibility(android.view.View.VISIBLE);
+        } else if (activeItem == navAbout) {
+            ivAbout.setColorFilter(android.graphics.Color.WHITE);
+            tvAboutLabel.setVisibility(android.view.View.VISIBLE);
+        }
+    }
+
+    private void resetNavItem(android.widget.LinearLayout item, android.widget.ImageView iv,
+            android.widget.TextView tv) {
+        item.setBackground(null);
+        item.setLayoutParams(new android.widget.LinearLayout.LayoutParams(0,
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT, 0.8f));
+        iv.setColorFilter(android.graphics.Color.parseColor("#888888"));
+        tv.setVisibility(android.view.View.GONE);
     }
 
     /**
      * Updates the four timer TextViews from total elapsed seconds.
      */
     private void updateTimerDisplay(long totalSeconds) {
-        long days    = totalSeconds / 86400;
-        long hours   = (totalSeconds % 86400) / 3600;
+        long days = totalSeconds / 86400;
+        long hours = (totalSeconds % 86400) / 3600;
         long minutes = (totalSeconds % 3600) / 60;
         long seconds = totalSeconds % 60;
 
@@ -87,16 +171,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setupAiSummary() {
         TextView tvSummary = findViewById(R.id.tvAiSummary);
-        if (tvSummary == null) return;
+        if (tvSummary == null)
+            return;
 
-        String fullText =
-            "Good Morning , today you need to complete your priority Tasks for completion " +
-            "the daily quest , so for today you need to complete the NPTEL assignment which " +
-            "is has the last date today so complete it !!\n\n" +
-            "Also you need to complete the course which is you punches from WEB-VEDA .\n" +
-            "Today you must need to do your leg day in GYM.\n" +
-            "So this are the tasks for today.\n" +
-            "Have a Good Day!!!";
+        String fullText = "Good Morning , today you need to complete your priority Tasks for completion " +
+                "the daily quest , so for today you need to complete the NPTEL assignment which " +
+                "is has the last date today so complete it !!\n\n" +
+                "Also you need to complete the course which is you punches from WEB-VEDA .\n" +
+                "Today you must need to do your leg day in GYM.\n" +
+                "So this are the tasks for today.\n" +
+                "Have a Good Day!!!";
 
         SpannableStringBuilder ssb = new SpannableStringBuilder(fullText);
 
@@ -115,11 +199,10 @@ public class MainActivity extends AppCompatActivity {
         int start = fullText.indexOf(target);
         if (start >= 0) {
             ssb.setSpan(
-                new StyleSpan(Typeface.BOLD),
-                start,
-                start + target.length(),
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            );
+                    new StyleSpan(Typeface.BOLD),
+                    start,
+                    start + target.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
 

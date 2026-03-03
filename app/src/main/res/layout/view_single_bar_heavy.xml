@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp">
+
+    <!-- Secondary bar (Grey) -->
+    <View
+        android:layout_width="12dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bar_bg_grey" />
+
+    <!-- Primary bar (Black) -->
+    <View
+        android:layout_width="12dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="6dp"
+        android:layout_toStartOf="@+id/centerAnchor"
+        android:background="@drawable/bar_bg_black" />
+
+    <View
+        android:id="@+id/centerAnchor"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
