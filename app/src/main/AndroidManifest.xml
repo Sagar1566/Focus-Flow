@@ -35,6 +35,9 @@
             android:name=".PlannerActivity"
             android:exported="false" />
         <activity
+            android:name=".AddPlannerActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity

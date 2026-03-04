@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/planer_crea"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToOutline="true"
     android:background="#FFFFFF">
 
     <!-- ===== MAIN CONTENT ===== -->
@@ -70,166 +72,229 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- Active Tasks -->
-            <LinearLayout
-                android:id="@+id/activeTasksContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include 
-                    android:id="@+id/task1"
-                    layout="@layout/item_planner_task" />
-                <include 
-                    android:id="@+id/task2"
-                    layout="@layout/item_planner_task" />
-                <include 
-                    android:id="@+id/task3"
-                    layout="@layout/item_planner_task" />
-                <include 
-                    android:id="@+id/task4"
-                    layout="@layout/item_planner_task" />
-                <include 
-                    android:id="@+id/task5"
-                    layout="@layout/item_planner_task" />
-
-            </LinearLayout>
-
-            <!-- Completed Section Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/task_badge_bg"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="Completed"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <!-- Completed Tasks -->
-            <LinearLayout
-                android:id="@+id/completedTasksContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include 
-                    android:id="@+id/comp1"
-                    layout="@layout/item_planner_task_completed" />
-                <include 
-                    android:id="@+id/comp2"
-                    layout="@layout/item_planner_task_completed" />
-                <include 
-                    android:id="@+id/comp3"
-                    layout="@layout/item_planner_task_completed" />
-                <include 
-                    android:id="@+id/comp4"
-                    layout="@layout/item_planner_task_completed" />
-                <include 
-                    android:id="@+id/comp5"
-                    layout="@layout/item_planner_task_completed" />
-                <include 
-                    android:id="@+id/comp6"
-                    layout="@layout/item_planner_task_completed" />
-                <include 
-                    android:id="@+id/comp7"
-                    layout="@layout/item_planner_task_completed" />
-
-            </LinearLayout>
-
-            <!-- Timeline Section -->
+            <!-- Back Button and Screen Title -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="80dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
 
-                <!-- Timeline Item 1 -->
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_bg_circle"
+                    android:backgroundTint="#FFFFFF"
+                    android:elevation="2dp">
                     
-                    <View
-                        android:id="@+id/topDot"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/profile_bg_circle"
-                        android:backgroundTint="#121417" />
-                    
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@id/topDot"
-                        android:layout_centerHorizontal="false"
-                        android:layout_marginStart="3dp"
-                        android:background="#DBE0E6" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_back_arrow" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/topDot"
-                        android:layout_marginStart="16dp"
-                        android:text="Completed \&quot;Complete design mockups\&quot;"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
                 </RelativeLayout>
 
-                <!-- Timeline Item 2 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
-                    
-                    <View
-                        android:id="@+id/bottomDot"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/profile_bg_circle"
-                        android:backgroundTint="#121417" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/bottomDot"
-                        android:layout_marginStart="16dp"
-                        android:text="Completed \&quot;Call with John at 2pm\&quot;"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
+                    android:layout_marginStart="16dp"
+                    android:text="Add tour reminder"
+                    android:textColor="#3A4646"
+                    android:textSize="24sp"
+                    android:textStyle="normal" />
             </LinearLayout>
+
+            <!-- Rounded Calendar Section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_calendar_rounded"
+                android:padding="12dp"
+                android:layout_marginBottom="32dp">
+                
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <!-- ===== INPUT FIELDS (Following Image Design) ===== -->
+
+            <!-- Date Field -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingTop="10dp">
+
+                <EditText
+                    android:id="@+id/etDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_input_box_refined"
+                    android:paddingHorizontal="16dp"
+                    android:text="Mar 5 - Mar 7"
+                    android:textColor="#4A5555"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_label_pill"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="1dp"
+                    android:text="Date"
+                    android:textColor="#7A8686"
+                    android:textSize="12sp"
+                    android:elevation="2dp" />
+            </RelativeLayout>
+
+            <!-- What's the tour about Field -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingTop="10dp">
+
+                <EditText
+                    android:id="@+id/etTourAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_input_box_refined"
+                    android:paddingHorizontal="16dp"
+                    android:text="Go to VNIT college for woekshop."
+                    android:textColor="#4A5555"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_label_pill"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="1dp"
+                    android:text="What's the tour about"
+                    android:textColor="#7A8686"
+                    android:textSize="12sp"
+                    android:elevation="2dp" />
+            </RelativeLayout>
+
+            <!-- Location Field -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_input_box_refined"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_settings_gear"
+                        android:tint="#3A4646" />
+
+                    <EditText
+                        android:id="@+id/etLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:background="@android:color/transparent"
+                        android:text="Nagpur,Maharastra, India"
+                        android:textColor="#4A5555"
+                        android:textSize="16sp"
+                        android:hint="Search location" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_label_pill"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="1dp"
+                    android:text="Location"
+                    android:textColor="#7A8686"
+                    android:textSize="12sp"
+                    android:elevation="2dp" />
+            </RelativeLayout>
+
+            <!-- Remarks Field -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:paddingTop="10dp">
+
+                <EditText
+                    android:id="@+id/etRemarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:background="@drawable/bg_input_box_refined"
+                    android:padding="16dp"
+                    android:text="Cyber Security Workshop, and also I want to participated in Drawing Comptition."
+                    android:textColor="#4A5555"
+                    android:textSize="16sp"
+                    android:gravity="top|start"
+                    android:lineSpacingExtra="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_label_pill"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="1dp"
+                    android:text="Remarks"
+                    android:textColor="#7A8686"
+                    android:textSize="12sp"
+                    android:elevation="2dp" />
+            </RelativeLayout>
+
+            <!-- Save Button -->
+            <RelativeLayout
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_btn_save"
+                android:layout_marginBottom="100dp"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Save"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground" />
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <!-- Create Button -->
-    <LinearLayout
-        android:id="@+id/btnCreateTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottomNavContainer"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/btn_dark_bg"
-        android:gravity="center"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create +"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <!-- ===== BOTTOM NAVIGATION BAR ===== -->
     <RelativeLayout
@@ -260,9 +325,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:clickable="true"
-                android:focusable="true">
+                android:paddingEnd="8dp">
                 <ImageView
                     android:id="@+id/ivHome"
                     android:layout_width="24dp"
@@ -289,9 +352,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:clickable="true"
-                android:focusable="true">
+                android:paddingEnd="8dp">
                 <ImageView
                     android:id="@+id/ivDashboard"
                     android:layout_width="24dp"
@@ -348,9 +409,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:clickable="true"
-                android:focusable="true">
+                android:paddingEnd="8dp">
                 <ImageView
                     android:id="@+id/ivMusic"
                     android:layout_width="24dp"
@@ -377,9 +436,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:clickable="true"
-                android:focusable="true">
+                android:paddingEnd="8dp">
                 <ImageView
                     android:id="@+id/ivAbout"
                     android:layout_width="24dp"
@@ -399,5 +456,4 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
 </RelativeLayout>
