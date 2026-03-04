@@ -20,12 +20,31 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
-        // Find the logo and start animation
+        // Apply animations to all elements
         android.widget.ImageView logo = findViewById(R.id.a_minimalis);
+        android.widget.ImageView topLeaf = findViewById(R.id.ivSplashTopLeaf);
+        android.widget.ImageView bottomLeaves = findViewById(R.id.ivSplashBottomLeaves);
+        android.widget.ImageView tallLeaf = findViewById(R.id.ivSplashTallLeaf);
+
         if (logo != null) {
             android.view.animation.Animation zoomIn = android.view.animation.AnimationUtils.loadAnimation(this,
                     R.anim.zoom_in_fade);
             logo.startAnimation(zoomIn);
+        }
+
+        if (topLeaf != null) {
+            android.view.animation.Animation slideTopRight = android.view.animation.AnimationUtils.loadAnimation(this,
+                    R.anim.leaf_top_right_entrance);
+            topLeaf.startAnimation(slideTopRight);
+        }
+
+        android.view.animation.Animation slideUp = android.view.animation.AnimationUtils.loadAnimation(this,
+                R.anim.leaf_bottom_entrance);
+        if (bottomLeaves != null) {
+            bottomLeaves.startAnimation(slideUp);
+        }
+        if (tallLeaf != null) {
+            tallLeaf.startAnimation(slideUp);
         }
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {

@@ -20,12 +20,14 @@ public class SignupActivity extends AppCompatActivity {
             // Later we can add registration logic here
             Intent intent = new Intent(SignupActivity.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
         });
 
         // Sign In text click
         findViewById(R.id.tvSignIn).setOnClickListener(v -> {
             finish(); // Go back to Login screen
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
     }
 }

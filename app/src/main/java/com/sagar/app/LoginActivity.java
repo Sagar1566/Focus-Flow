@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
         });
 
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.tvSignUp).setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
     }
 }

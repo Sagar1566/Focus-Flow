@@ -60,40 +60,32 @@ public class ProfileActivity extends AppCompatActivity {
     private void setupBottomNavigation() {
         navHome.setOnClickListener(v -> {
             setActiveNavItem(navHome);
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
-            }, 200);
+            android.content.Intent intent = new android.content.Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.nav_fade_in, R.anim.nav_fade_out);
+            finish();
         });
         navDashboard.setOnClickListener(v -> {
             setActiveNavItem(navDashboard);
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(ProfileActivity.this,
-                        DashboardActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
-            }, 200);
+            android.content.Intent intent = new android.content.Intent(ProfileActivity.this,
+                    DashboardActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.nav_fade_in, R.anim.nav_fade_out);
+            finish();
         });
         navPlanner.setOnClickListener(v -> {
             setActiveNavItem(navPlanner);
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(ProfileActivity.this, PlannerActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
-            }, 200);
+            android.content.Intent intent = new android.content.Intent(ProfileActivity.this, PlannerActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.nav_fade_in, R.anim.nav_fade_out);
+            finish();
         });
         navMusic.setOnClickListener(v -> {
             setActiveNavItem(navMusic);
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(ProfileActivity.this, MusicActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
-            }, 200);
+            android.content.Intent intent = new android.content.Intent(ProfileActivity.this, MusicActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.nav_fade_in, R.anim.nav_fade_out);
+            finish();
         });
         navAbout.setOnClickListener(v -> setActiveNavItem(navAbout));
     }
