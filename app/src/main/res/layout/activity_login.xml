@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
 
+
+    <!-- Top Right Decorative Leaf -->
+    <ImageView
+        android:id="@+id/ivTopLeaf"
+        android:layout_width="148dp"
+        android:layout_height="145dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-10dp"
+        android:layout_marginEnd="-10dp"
+        android:contentDescription="Decorative leaf"
+        android:scaleType="fitEnd"
+        android:src="@drawable/ic_leaf_single" />
 
     <!-- Scrollable Content -->
     <ScrollView
@@ -20,74 +34,77 @@
             android:layout_height="wrap_content">
 
             <!-- Welcome Header -->
+
+            <!-- Bottom Leaves -->
+            <!-- The leaves illustration is placed at the bottom -->
             <LinearLayout
                 android:id="@+id/headerSection"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="532dp"
                 android:orientation="vertical"
-                android:paddingTop="50dp"
                 android:paddingStart="40dp"
+                android:paddingTop="50dp"
                 android:paddingEnd="40dp">
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/focus_flow"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/focus_flow" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Sign In"
                     android:textColor="#000000"
                     android:textSize="32sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="8dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
                     android:text="Sign in now to acces save your Task"
                     android:textColor="#666666"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="50dp" />
+                    android:textSize="16sp" />
 
                 <!-- Email Input -->
                 <EditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
                     android:background="@drawable/bg_edittext_underline"
                     android:hint="Email Address"
-                    android:textColorHint="#999999"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
+                    android:inputType="textEmailAddress"
                     android:paddingBottom="12dp"
-                    android:layout_marginBottom="30dp"
-                    android:inputType="textEmailAddress" />
+                    android:textColor="#000000"
+                    android:textColorHint="#999999"
+                    android:textSize="16sp" />
 
                 <!-- Password Input -->
                 <EditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_edittext_underline"
                     android:hint="Password"
-                    android:textColorHint="#999999"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
+                    android:inputType="textPassword"
                     android:paddingBottom="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:inputType="textPassword" />
+                    android:textColor="#000000"
+                    android:textColorHint="#999999"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="40dp"
                     android:text="Forgot Password?"
                     android:textColor="#B0B0B0"
-                    android:textSize="12sp"
-                    android:layout_gravity="end"
-                    android:layout_marginBottom="40dp" />
+                    android:textSize="12sp" />
 
                 <!-- Login Button -->
                 <RelativeLayout
@@ -97,15 +114,16 @@
                     android:background="@drawable/btn_dark_bg"
                     android:clickable="true"
                     android:focusable="true">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:letterSpacing="0.1"
                         android:text="LOGIN"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.1" />
+                        android:textStyle="bold" />
                 </RelativeLayout>
 
                 <!-- Sign Up Text -->
@@ -113,14 +131,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="24dp">
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Don't have an account? "
                         android:textColor="#666666"
                         android:textSize="16sp" />
+
                     <TextView
                         android:id="@+id/tvSignUp"
                         android:layout_width="wrap_content"
@@ -133,14 +153,20 @@
 
             </LinearLayout>
 
-            <!-- Bottom Leaves -->
-            <!-- The leaves illustration is placed at the bottom -->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="241dp"
                 android:layout_alignParentBottom="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_login_leaves_1" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="160dp"
+                android:layout_height="151dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="-2dp"
+                app:srcCompat="@drawable/ic_leaf_tall" />
 
 
         </RelativeLayout>

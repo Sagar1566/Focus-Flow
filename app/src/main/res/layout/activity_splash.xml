@@ -1,50 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_start_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <!-- Top-left botanical leaves (partially off-screen left and top) -->
-    <ImageView
-        android:id="@+id/group_29"
-        android:layout_width="352dp"
-        android:layout_height="451dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="-153dp"
-        android:layout_marginTop="-39dp"
-        android:alpha="0.25"
-        android:src="@drawable/leaves_botanical"
-        android:scaleType="fitXY"
-        android:contentDescription="Decorative leaves" />
+    <!-- ===== TOP-LEFT: Tall plant stem (solid accent at corner) ===== -->
 
-    <!-- Bottom-right monstera leaves (partially off-screen right and bottom) -->
-    <ImageView
-        android:id="@+id/group_28"
-        android:layout_width="352dp"
-        android:layout_height="451dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="142dp"
-        android:layout_marginTop="477dp"
-        android:alpha="0.25"
-        android:src="@drawable/leaves_monstera"
-        android:scaleType="fitXY"
-        android:contentDescription="Decorative monstera leaf" />
+    <!-- ===== TOP-LEFT: Botanical branches radiating outward ===== -->
 
-    <!-- App logo — centered on screen -->
+    <!-- ===== TOP-RIGHT: Multi-path botanical outline leaves ===== -->
+
+    <!-- ===== CENTER: Focus Flow logo ===== -->
+
     <ImageView
         android:id="@+id/a_minimalis"
-        android:layout_width="76dp"
-        android:layout_height="76dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="163dp"
-        android:layout_marginTop="398dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_centerInParent="true"
         android:src="@drawable/focus_flow"
         android:scaleType="fitCenter"
         android:contentDescription="Focus Flow logo" />
+
+    <!-- ===== BOTTOM-LEFT: Large monstera silhouette ===== -->
+
+    <!-- ===== BOTTOM-RIGHT: Small branch accent ===== -->
 
 </RelativeLayout>

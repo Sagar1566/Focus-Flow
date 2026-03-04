@@ -39,7 +39,11 @@ public class AddPlannerActivity extends AppCompatActivity {
         });
 
         btnSave.setOnClickListener(v -> {
-            onBackPressed();
+            // Navigate to PlannerViewActivity when save is clicked
+            Intent intent = new Intent(AddPlannerActivity.this, PlannerViewActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            finish();
         });
     }
 
