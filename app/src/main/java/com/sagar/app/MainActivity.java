@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Clip scroll content to the grey container's rounded corners
+        android.widget.LinearLayout greyContainer = findViewById(R.id.greyContentContainer);
+        if (greyContainer != null) {
+            greyContainer.setClipToOutline(true);
+        }
+
         // Bind timer views
         tvDays = findViewById(R.id.tvDays);
         tvHours = findViewById(R.id.tvHours);
