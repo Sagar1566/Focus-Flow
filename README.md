@@ -1,3 +1,3 @@
 # Focus-Flow
 working
-focus flow 
+focus flow app  

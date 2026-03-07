@@ -10,120 +10,12 @@
     android:background="#FFFFFF"
     tools:context=".EditProfileActivity">
 
-    <!-- ===== BOTTOM NAVIGATION BAR ===== -->
     <LinearLayout
-        android:id="@+id/bottomNavContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="20dp">
-
-        <LinearLayout
-            android:layout_width="309dp"
-            android:layout_height="54dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/bottom_nav_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="2dp"
-            android:paddingEnd="16dp"
-            android:weightSum="5">
-
-            <LinearLayout
-                android:id="@+id/navHome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:src="@drawable/ic_home" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navDashboard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:src="@drawable/ic_carbon_dash" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navTasks"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_task" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navMusic"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_music" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navAbout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.6"
-                android:gravity="center"
-                android:paddingStart="1dp"
-                android:paddingEnd="12dp">
-                <LinearLayout
-                    android:layout_width="96dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/active_tab_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_profile" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:text="About"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavContainer"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:gravity="center_horizontal">
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
 
             <!-- HEADER ROW -->
             <RelativeLayout
@@ -212,12 +104,12 @@
                         android:src="@drawable/ic_person"
                         android:alpha="0.6"/>
                     <EditText
+                        android:id="@+id/etFullName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:hint="Full Name"
                         android:layout_marginStart="12dp"
-                        android:text="Ruturaj Nakshane"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:inputType="textPersonName"/>
@@ -239,12 +131,12 @@
                         android:src="@drawable/ic_calendar"
                         android:alpha="0.6"/>
                     <EditText
+                        android:id="@+id/etDob"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:hint="Date of Birth"
                         android:layout_marginStart="12dp"
-                        android:text="25/01/2006"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:focusable="false"
@@ -267,15 +159,16 @@
                         android:src="@drawable/ic_email"
                         android:alpha="0.6"/>
                     <EditText
+                        android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:hint="Email Address"
                         android:layout_marginStart="12dp"
-                        android:text="ruturaj@mail.com"
                         android:textColor="#000000"
                         android:textSize="16sp"
-                        android:inputType="textEmailAddress"/>
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"/>
                 </LinearLayout>
 
                 <!-- Phone Field -->
@@ -316,44 +209,76 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp">
                         <EditText
+                            android:id="@+id/etPhone"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:hint="Phone Number"
-                            android:text="78965664561"
                             android:textColor="#000000"
                             android:textSize="16sp"
                             android:inputType="phone"/>
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Gender Field -->
-                <LinearLayout
+                <!-- Gender Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioGroup
+                    android:id="@+id/rgGender"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/card_white_bg"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-                    <TextView
+                    android:layout_marginBottom="24dp">
+
+                    <RadioButton
+                        android:id="@+id/rbMale"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:text="Gender"
-                        android:textColor="#000000"
-                        android:textSize="16sp"/>
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                        android:alpha="0.6"/>
-                </LinearLayout>
+                        android:text="Male"
+                        android:background="@drawable/gender_option_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="@color/gender_text_color" />
+
+                    <RadioButton
+                        android:id="@+id/rbFemale"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="Female"
+                        android:background="@drawable/gender_option_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="@color/gender_text_color" />
+
+                    <RadioButton
+                        android:id="@+id/rbOther"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="Other"
+                        android:background="@drawable/gender_option_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/gender_text_color" />
+                </RadioGroup>
 
             </LinearLayout>
 
             <!-- UPDATE BUTTON -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnUpdateProfile"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginStart="4dp"
@@ -373,6 +298,5 @@
                     android:textStyle="bold" />
             </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

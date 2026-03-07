@@ -315,7 +315,7 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:animateLayoutChanges="true"
-            android:weightSum="5">
+            android:weightSum="4.2">
 
             <!-- Home -->
             <LinearLayout
@@ -344,34 +344,7 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <!-- Dashboard -->
-            <LinearLayout
-                android:id="@+id/navDashboard"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="0.8"
-                android:gravity="center"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-                <ImageView
-                    android:id="@+id/ivDashboard"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_carbon_dash"
-                    android:tint="#888888" />
-                <TextView
-                    android:id="@+id/tvDashboardLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Dashboard"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-            </LinearLayout>
-
-            <!-- Planner (Active) -->
+            <!-- Add Tour (Active) -->
             <LinearLayout
                 android:id="@+id/navPlanner"
                 android:layout_width="0dp"
@@ -387,10 +360,37 @@
                     android:id="@+id/ivPlanner"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_task"
+                    android:src="@drawable/ic_location"
                     android:tint="#FFFFFF" />
                 <TextView
                     android:id="@+id/tvPlannerLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Add Tour"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <!-- Planner (Center) -->
+            <LinearLayout
+                android:id="@+id/navCreate"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivCreate"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_task"
+                    android:tint="#888888" />
+                <TextView
+                    android:id="@+id/tvCreateLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -398,7 +398,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
 
             <!-- Music -->

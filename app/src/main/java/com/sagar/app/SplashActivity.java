@@ -48,7 +48,14 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            com.google.firebase.auth.FirebaseAuth mAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
+            if (mAuth.getCurrentUser() != null) {
+                // User is already signed in, go to MainActivity
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            } else {
+                // No user signed in, go to LoginActivity
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            }
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
         }, SPLASH_DELAY_MS);
