@@ -20,9 +20,9 @@ import java.util.Locale;
 public class PlannerActivity extends AppCompatActivity {
 
     private ViewGroup bottomNavMenu;
-    private LinearLayout navHome, navPlanner, navMusic, navAbout, navCreate;
-    private ImageView ivHome, ivPlanner, ivMusic, ivAbout, ivCreate;
-    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel, tvCreateLabel;
+    private LinearLayout navHome, navPlanner, navMusic, navAbout;
+    private ImageView ivHome, ivPlanner, ivMusic, ivAbout;
+    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
 
     private LinearLayout activeTasksContainer, completedTasksContainer;
     private TextView tvTodayDate, tabDailyTasks, tabTourReminders;
@@ -41,7 +41,7 @@ public class PlannerActivity extends AppCompatActivity {
         initializeViews();
         setupBottomNavigation();
         setupTabSwitching();
-        setActiveNavItem(navCreate);
+        setActiveNavItem(navPlanner);
         setTodayDate();
         loadTasksFromFirebase();
     }
@@ -198,34 +198,22 @@ public class PlannerActivity extends AppCompatActivity {
         navPlanner = findViewById(R.id.navPlanner);
         navMusic = findViewById(R.id.navMusic);
         navAbout = findViewById(R.id.navAbout);
-        navCreate = findViewById(R.id.navCreate);
 
         ivHome = findViewById(R.id.ivHome);
         ivPlanner = findViewById(R.id.ivPlanner);
         ivMusic = findViewById(R.id.ivMusic);
         ivAbout = findViewById(R.id.ivAbout);
-        ivCreate = findViewById(R.id.ivCreate);
 
         tvHomeLabel = findViewById(R.id.tvHomeLabel);
         tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
         tvMusicLabel = findViewById(R.id.tvMusicLabel);
         tvAboutLabel = findViewById(R.id.tvAboutLabel);
-        tvCreateLabel = findViewById(R.id.tvCreateLabel);
 
         activeTasksContainer = findViewById(R.id.activeTasksContainer);
         completedTasksContainer = findViewById(R.id.completedTasksContainer);
         tabDailyTasks = findViewById(R.id.tabDailyTasks);
         tabTourReminders = findViewById(R.id.tabTourReminders);
         tvTodayDate = findViewById(R.id.tvTodayDate);
-
-        LinearLayout btnCreateTask = findViewById(R.id.btnCreateTask);
-        if (btnCreateTask != null) {
-            btnCreateTask.setOnClickListener(v -> {
-                Intent intent = new Intent(this, AddPlannerActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            });
-        }
     }
 
     private void setupTabSwitching() {
@@ -310,8 +298,6 @@ public class PlannerActivity extends AppCompatActivity {
                 finish();
             }, 120);
         });
-
-        navCreate.setOnClickListener(v -> setActiveNavItem(navCreate));
     }
 
     private void setActiveNavItem(LinearLayout activeItem) {
@@ -326,7 +312,6 @@ public class PlannerActivity extends AppCompatActivity {
         resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
         resetNavItem(navMusic, ivMusic, tvMusicLabel);
         resetNavItem(navAbout, ivAbout, tvAboutLabel);
-        resetNavItem(navCreate, ivCreate, tvCreateLabel);
 
         activeItem.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
         activeItem.setScaleX(0.9f);
@@ -342,8 +327,6 @@ public class PlannerActivity extends AppCompatActivity {
             ivMusic.setColorFilter(Color.BLACK);
         } else if (activeItem == navAbout) {
             ivAbout.setColorFilter(Color.BLACK);
-        } else if (activeItem == navCreate) {
-            ivCreate.setColorFilter(Color.BLACK);
         }
     }
 

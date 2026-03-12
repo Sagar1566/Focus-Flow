@@ -16,11 +16,16 @@ import android.widget.ImageView;
 import android.view.ViewGroup;
 import android.view.View;
 import android.graphics.Color;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvDays, tvHours, tvMinutes, tvSeconds;
     private TextView btnStartFocus, btnSetFocus, btnStopFocus;
+    private ImageView btnPlayMusic;
+    private FloatingActionButton fabCreateTask;
     private Handler timerHandler = new Handler(Looper.getMainLooper()); // Initialized here
     private Runnable timerRunnable;
     private long remainingSeconds = 0;
@@ -34,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseHelper firebaseHelper; // Added FirebaseHelper
 
     private ViewGroup bottomNavMenu;
-    private LinearLayout navHome, navPlanner, navMusic, navAbout, navCreate;
-    private ImageView ivHome, ivPlanner, ivMusic, ivAbout, ivCreate;
-    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel, tvCreateLabel;
+    private LinearLayout navHome, navPlanner, navMusic, navAbout;
+    private ImageView ivHome, ivPlanner, ivMusic, ivAbout;
+    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
+    private TextView tvAiSummary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         btnStartFocus = findViewById(R.id.btnStartFocus);
         btnSetFocus = findViewById(R.id.btnSetFocus);
         btnStopFocus = findViewById(R.id.btnStopFocus);
+        btnPlayMusic = findViewById(R.id.btnPlayMusic);
+        fabCreateTask = findViewById(R.id.fabCreateTask);
 
         // 1. Initialize Navigation
         bottomNavMenu = findViewById(R.id.bottomNavMenu);
@@ -90,24 +98,78 @@ public class MainActivity extends AppCompatActivity {
         navPlanner = findViewById(R.id.navPlanner);
         navMusic = findViewById(R.id.navMusic);
         navAbout = findViewById(R.id.navAbout);
-        navCreate = findViewById(R.id.navCreate);
+        navAbout = findViewById(R.id.navAbout);
 
         ivHome = findViewById(R.id.ivHome);
         ivPlanner = findViewById(R.id.ivPlanner);
         ivMusic = findViewById(R.id.ivMusic);
         ivAbout = findViewById(R.id.ivAbout);
-        ivCreate = findViewById(R.id.ivCreate);
 
         tvHomeLabel = findViewById(R.id.tvHomeLabel);
         tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
         tvMusicLabel = findViewById(R.id.tvMusicLabel);
         tvAboutLabel = findViewById(R.id.tvAboutLabel);
-        tvCreateLabel = findViewById(R.id.tvCreateLabel);
 
         setupBottomNavigation();
 
+        // Set up music button
+        if (btnPlayMusic != null) {
+            btnPlayMusic.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, MusicActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            });
+        }
+
+        // Set up floating create button
+        if (fabCreateTask != null) {
+            fabCreateTask.setOnClickListener(v -> showTaskCreationSheet());
+        }
+
+        // Set up refresh button for AI Summary
+        ImageView btnRefreshAiSummary = findViewById(R.id.btnRefreshAiSummary);
+        TextView tvRefreshLabel = findViewById(R.id.tvRefreshLabel);
+
+        View.OnClickListener refreshClickListener = v -> {
+            // Show loading state
+            tvAiSummary.setText("Refreshing...");
+            // Regenerate motivation with new random message
+            setupAiSummary();
+        };
+
+        if (btnRefreshAiSummary != null) {
+            btnRefreshAiSummary.setOnClickListener(refreshClickListener);
+        }
+        if (tvRefreshLabel != null) {
+            tvRefreshLabel.setOnClickListener(refreshClickListener);
+        }
+
+        // Set up refresh button for Motivation blog
+        ImageView btnRefreshMotivation = findViewById(R.id.btnRefreshMotivation);
+        if (btnRefreshMotivation != null) {
+            btnRefreshMotivation.setOnClickListener(v -> {
+                // You can add logic here to refresh the motivation blog content
+                android.widget.Toast.makeText(this, "Refreshing motivation...", android.widget.Toast.LENGTH_SHORT)
+                        .show();
+            });
+        }
+
+        // Set up streak click handler
+        LinearLayout navStreak = findViewById(R.id.navStreak);
+        if (navStreak != null) {
+            navStreak.setOnClickListener(v -> {
+                android.widget.Toast.makeText(this, "Current streak: " +
+                        getSharedPreferences("StreakPrefs", MODE_PRIVATE).getInt("currentStreak", 0) + " days! 🔥",
+                        android.widget.Toast.LENGTH_SHORT).show();
+            });
+        }
+
         // Set AI Summary text with bold keywords
         setupAiSummary();
+
+        // Set up streak display and tracking
+        updateStreakDisplay();
+        updateStreak(); // Track daily activity
 
         // Set up timer handler
         timerHandler = new Handler(Looper.getMainLooper());
@@ -349,65 +411,35 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }, 120);
         });
-
-        navCreate.setOnClickListener(v -> {
-            setActiveNavItem(navCreate);
-            new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, PlannerActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                finish();
-            }, 120);
-        });
     }
 
     private void setActiveNavItem(LinearLayout activeItem) {
-        // High-end bouncy transition for the bottom nav island
-        android.transition.TransitionSet set = new android.transition.TransitionSet()
-                .addTransition(new android.transition.ChangeBounds())
-                .addTransition(new android.transition.Fade())
-                .setDuration(350)
-                .setInterpolator(new android.view.animation.OvershootInterpolator(1.2f));
+        // Simple color change for active state
+        resetNavItem(navHome, ivHome, tvHomeLabel, R.drawable.ic_home);
+        resetNavItem(navPlanner, ivPlanner, tvPlannerLabel, R.drawable.ic_location);
+        resetNavItem(navMusic, ivMusic, tvMusicLabel, R.drawable.ic_music);
+        resetNavItem(navAbout, ivAbout, tvAboutLabel, R.drawable.ic_profile);
 
-        android.transition.TransitionManager.beginDelayedTransition(bottomNavMenu, set);
-
-        resetNavItem(navHome, ivHome, tvHomeLabel);
-        resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
-        resetNavItem(navMusic, ivMusic, tvMusicLabel);
-        resetNavItem(navAbout, ivAbout, tvAboutLabel);
-        resetNavItem(navCreate, ivCreate, tvCreateLabel);
-
-        activeItem.setLayoutParams(new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-
-        activeItem.setScaleX(0.9f);
-        activeItem.setScaleY(0.9f);
-        activeItem.animate().scaleX(1.1f).scaleY(1.1f).setDuration(400)
-                .setInterpolator(new android.view.animation.OvershootInterpolator(2.0f)).start();
-
+        // Set active item to black
         if (activeItem == navHome) {
             ivHome.setColorFilter(Color.BLACK);
+            tvHomeLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navPlanner) {
             ivPlanner.setColorFilter(Color.BLACK);
+            tvPlannerLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navMusic) {
             ivMusic.setColorFilter(Color.BLACK);
+            tvMusicLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navAbout) {
             ivAbout.setColorFilter(Color.BLACK);
-        } else if (activeItem == navCreate) {
-            ivCreate.setColorFilter(Color.BLACK);
+            tvAboutLabel.setTextColor(Color.BLACK);
         }
     }
 
     private void resetNavItem(android.widget.LinearLayout item, android.widget.ImageView iv,
-            android.widget.TextView tv) {
-        item.setBackground(null);
-        item.setLayoutParams(new android.widget.LinearLayout.LayoutParams(0,
-                android.view.ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-        item.setScaleX(1.0f);
-        item.setScaleY(1.0f);
+            android.widget.TextView tv, int drawableRes) {
         iv.setColorFilter(Color.parseColor("#888888"));
-        if (tv != null)
-            tv.setVisibility(android.view.View.GONE);
+        tv.setTextColor(Color.parseColor("#888888"));
     }
 
     /**
@@ -426,49 +458,87 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Fetches pending tasks from Firestore and builds a dynamic AI summary.
+     * Fetches pending tasks from Firestore and builds a structured AI summary.
      */
     private void setupAiSummary() {
-        TextView tvSummary = findViewById(R.id.tvAiSummary);
-        if (tvSummary == null)
+        tvAiSummary = findViewById(R.id.tvAiSummary);
+        if (tvAiSummary == null)
             return;
 
         // Show loading text first
-        tvSummary.setText("Loading your tasks...");
+        tvAiSummary.setText("Loading your tasks...");
 
         FirebaseHelper helper = new FirebaseHelper();
         com.google.firebase.firestore.Query query = helper.getTasksQuery();
         if (query == null) {
-            tvSummary.setText("Login to see your task summary.");
+            tvAiSummary.setText("Login to see your task summary.");
             return;
         }
 
         query.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            int pending = 0;
+            java.util.List<String> pendingTasks = new java.util.ArrayList<>();
             int totalCompleted = 0;
 
             for (com.google.firebase.firestore.QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                 TaskModel task = doc.toObject(TaskModel.class);
                 if (!task.isCompleted()) {
-                    pending++;
+                    pendingTasks.add(task.getTitle());
                 } else {
                     totalCompleted++;
                 }
             }
 
             StringBuilder sb = new StringBuilder();
-            if (pending == 0) {
-                sb.append("🎉 Amazing work! You're crushing it today. Relax or plan ahead!");
+
+            if (pendingTasks.isEmpty()) {
+                sb.append("Remaining Tasks:\n");
+                sb.append("All tasks completed!\n\n");
+                sb.append("Motivation:\n");
+                sb.append(generateMotivation(true));
             } else {
-                sb.append("🔥 ").append(pending).append(" task(s) left to conquer. ");
-                if (totalCompleted > 0)
-                    sb.append(totalCompleted).append(" down! ");
-                sb.append("Stay focused, you got this! 🚀");
+                sb.append("Remaining Tasks:\n");
+                for (String taskName : pendingTasks) {
+                    sb.append("- ").append(taskName).append("\n");
+                }
+                sb.append("\nMotivation:\n");
+                sb.append(generateMotivation(false));
             }
 
-            tvSummary.setText(sb.toString());
+            tvAiSummary.setText(sb.toString());
 
-        }).addOnFailureListener(e -> tvSummary.setText("Stay focused and tackle your day! 🚀"));
+        }).addOnFailureListener(e -> tvAiSummary.setText("Unable to load tasks. Please check your connection."));
+    }
+
+    /**
+     * Generates a unique motivational message based on task completion status.
+     */
+    private String generateMotivation(boolean allCompleted) {
+        java.util.Random random = new java.util.Random();
+
+        if (allCompleted) {
+            String[] messages = {
+                    "Excellent work! You've cleared all your tasks. Take a moment to celebrate your achievements.",
+                    "Outstanding! All tasks are complete. Your dedication is paying off.",
+                    "Well done! You've accomplished everything. Ready to take on more challenges?",
+                    "Perfect! All tasks completed. Your productivity is inspiring.",
+                    "Fantastic! You've conquered all your tasks. Keep this momentum going!"
+            };
+            return messages[random.nextInt(messages.length)];
+        } else {
+            String[] messages = {
+                    "Consistent effort leads to meaningful progress. Complete the next task and keep moving forward.",
+                    "You are making steady progress toward your goals. Stay focused on the next task and maintain your momentum.",
+                    "Every task you complete brings you closer to success. Tackle the next one with confidence.",
+                    "Focus on one task at a time. Small steps lead to big achievements.",
+                    "Your determination is building positive habits. Continue with the next task.",
+                    "Progress happens when you commit to taking action. You've got this!",
+                    "Stay present with your current task. Completion is within reach.",
+                    "Each completed task strengthens your discipline. Keep pushing forward.",
+                    "Your efforts today create the foundation for tomorrow's success.",
+                    "Clarity and focus will help you conquer these remaining tasks efficiently."
+            };
+            return messages[random.nextInt(messages.length)];
+        }
     }
 
     /**
@@ -483,6 +553,147 @@ public class MainActivity extends AppCompatActivity {
                     start + target.length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+    }
+
+    /**
+     * Show task creation bottom sheet dialog
+     */
+    private void showTaskCreationSheet() {
+        com.google.android.material.bottomsheet.BottomSheetDialog dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(
+                this, R.style.BottomSheetDialogTheme);
+        View view = getLayoutInflater().inflate(R.layout.layout_task_creation_sheet, null);
+        dialog.setContentView(view);
+
+        android.widget.EditText etTaskName = view.findViewById(R.id.etTaskName);
+        View btnCreate = view.findViewById(R.id.btnCreate);
+
+        // Create button click
+        btnCreate.setOnClickListener(v -> {
+            String taskName = etTaskName.getText().toString().trim();
+
+            if (taskName.isEmpty()) {
+                etTaskName.setError("Task name is required");
+                return;
+            }
+
+            // Save task to Firestore (description is empty in this new UI)
+            saveTaskToFirestore(taskName, "");
+
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+    /**
+     * Save task to Firestore
+     */
+    private void saveTaskToFirestore(String taskName, String description) {
+        com.google.firebase.auth.FirebaseAuth mAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
+
+        // Check if user is logged in
+        if (mAuth.getCurrentUser() == null) {
+            android.widget.Toast.makeText(this, "Please login to create tasks", android.widget.Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        String userId = mAuth.getCurrentUser().getUid();
+
+        java.util.Map<String, Object> task = new java.util.HashMap<>();
+        task.put("title", taskName);
+        task.put("description", description != null ? description : "");
+        task.put("completed", false);
+        task.put("timestamp", System.currentTimeMillis());
+        task.put("type", "TASK");
+
+        // Use the same path as FirebaseHelper: users/{userId}/tasks/
+        com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userId)
+                .collection("tasks")
+                .add(task)
+                .addOnSuccessListener(documentReference -> {
+                    android.widget.Toast
+                            .makeText(this, "Task created successfully! ✨", android.widget.Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    android.widget.Toast.makeText(this, "Failed to create task: " + e.getMessage(),
+                            android.widget.Toast.LENGTH_LONG).show();
+                });
+    }
+
+    /**
+     * Update streak display in bottom navigation
+     */
+    private void updateStreakDisplay() {
+        TextView tvStreakCount = findViewById(R.id.tvStreakCount);
+        if (tvStreakCount == null)
+            return;
+
+        // Get current streak from SharedPreferences
+        android.content.SharedPreferences prefs = getSharedPreferences("StreakPrefs", MODE_PRIVATE);
+        int currentStreak = prefs.getInt("currentStreak", 0);
+
+        tvStreakCount.setText(String.valueOf(currentStreak));
+    }
+
+    /**
+     * Update user's streak based on last activity
+     */
+    private void updateStreak() {
+        android.content.SharedPreferences prefs = getSharedPreferences("StreakPrefs", MODE_PRIVATE);
+        long lastActiveTime = prefs.getLong("lastActiveTime", 0);
+        int currentStreak = prefs.getInt("currentStreak", 0);
+
+        long currentTime = System.currentTimeMillis();
+        long oneDayInMillis = 24 * 60 * 60 * 1000;
+
+        // If this is the first time or more than a day has passed
+        if (lastActiveTime == 0 || (currentTime - lastActiveTime) > oneDayInMillis) {
+            // Check if it's a new day (reset at midnight)
+            java.util.Calendar lastCalendar = java.util.Calendar.getInstance();
+            lastCalendar.setTimeInMillis(lastActiveTime);
+            java.util.Calendar currentCalendar = java.util.Calendar.getInstance();
+            currentCalendar.setTimeInMillis(currentTime);
+
+            // If it's a different day
+            if (lastCalendar.get(java.util.Calendar.DAY_OF_YEAR) != currentCalendar
+                    .get(java.util.Calendar.DAY_OF_YEAR)) {
+                // If less than 2 days since last activity, increment streak
+                if (lastActiveTime > 0 && (currentTime - lastActiveTime) < (oneDayInMillis * 2)) {
+                    currentStreak++;
+                } else if (lastActiveTime > 0) {
+                    // Streak broken, reset to 1
+                    currentStreak = 1;
+                } else {
+                    // First time
+                    currentStreak = 1;
+                }
+
+                // Save updated streak
+                prefs.edit()
+                        .putInt("currentStreak", currentStreak)
+                        .putLong("lastActiveTime", currentTime)
+                        .apply();
+
+                updateStreakDisplay();
+            }
+        }
+
+        // Update last active time
+        prefs.edit().putLong("lastActiveTime", currentTime).apply();
+    }
+
+    /**
+     * Increment streak (call this when user completes a task or focus session)
+     */
+    private void incrementStreak() {
+        android.content.SharedPreferences prefs = getSharedPreferences("StreakPrefs", MODE_PRIVATE);
+        int currentStreak = prefs.getInt("currentStreak", 0);
+        currentStreak++;
+        prefs.edit().putInt("currentStreak", currentStreak).apply();
+        updateStreakDisplay();
     }
 
     @Override

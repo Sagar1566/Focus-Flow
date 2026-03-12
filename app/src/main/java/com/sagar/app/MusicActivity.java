@@ -26,9 +26,9 @@ import java.util.Map;
 public class MusicActivity extends AppCompatActivity {
 
     private android.view.ViewGroup bottomNavMenu;
-    private android.widget.LinearLayout navHome, navPlanner, navMusic, navAbout, navCreate;
-    private android.widget.ImageView ivHome, ivPlanner, ivMusic, ivAbout, ivCreate;
-    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel, tvCreateLabel;
+    private android.widget.LinearLayout navHome, navPlanner, navMusic, navAbout;
+    private android.widget.ImageView ivHome, ivPlanner, ivMusic, ivAbout;
+    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
     private ImageView ivFeaturedImage, ivForestItem, ivMountainsItem, ivDesertItem, ivHillItem;
 
     // Optimized Image URLs for performance
@@ -76,19 +76,17 @@ public class MusicActivity extends AppCompatActivity {
         navPlanner = findViewById(R.id.navPlanner);
         navMusic = findViewById(R.id.navMusic);
         navAbout = findViewById(R.id.navAbout);
-        navCreate = findViewById(R.id.navCreate);
+        navAbout = findViewById(R.id.navAbout);
 
         ivHome = findViewById(R.id.ivHome);
         ivPlanner = findViewById(R.id.ivPlanner);
         ivMusic = findViewById(R.id.ivMusic);
         ivAbout = findViewById(R.id.ivAbout);
-        ivCreate = findViewById(R.id.ivCreate);
 
         tvHomeLabel = findViewById(R.id.tvHomeLabel);
         tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
         tvMusicLabel = findViewById(R.id.tvMusicLabel);
         tvAboutLabel = findViewById(R.id.tvAboutLabel);
-        tvCreateLabel = findViewById(R.id.tvCreateLabel);
 
         // Bind Content Images
         ivFeaturedImage = findViewById(R.id.ivFeaturedImage);
@@ -101,12 +99,6 @@ public class MusicActivity extends AppCompatActivity {
 
         setupBottomNavigation();
         setActiveNavItem(navMusic);
-
-        // Track clicklisteners
-        View btnFeatured = findViewById(R.id.btnPlayNowFeatured);
-        if (btnFeatured != null)
-            btnFeatured.setOnClickListener(
-                    v -> showNowPlaying("Gentle Rain", "Ambient Focus", R.drawable.forest, 0));
 
         View imgForest = findViewById(R.id.imgPaintingForest);
         if (imgForest != null)
@@ -458,16 +450,6 @@ public class MusicActivity extends AppCompatActivity {
                 finish();
             }, 120);
         });
-
-        navCreate.setOnClickListener(v -> {
-            setActiveNavItem(navCreate);
-            new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-                android.content.Intent intent = new android.content.Intent(MusicActivity.this, PlannerActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                finish();
-            }, 120);
-        });
     }
 
     @Override
@@ -485,45 +467,30 @@ public class MusicActivity extends AppCompatActivity {
     }
 
     private void setActiveNavItem(LinearLayout activeItem) {
-        android.transition.TransitionSet set = new android.transition.TransitionSet()
-                .addTransition(new android.transition.ChangeBounds())
-                .addTransition(new android.transition.Fade())
-                .setDuration(300)
-                .setInterpolator(new android.view.animation.OvershootInterpolator(1.0f));
-        android.transition.TransitionManager.beginDelayedTransition(bottomNavMenu, set);
-
+        // Simple color change for active state
         resetNavItem(navHome, ivHome, tvHomeLabel);
         resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
         resetNavItem(navMusic, ivMusic, tvMusicLabel);
         resetNavItem(navAbout, ivAbout, tvAboutLabel);
-        resetNavItem(navCreate, ivCreate, tvCreateLabel);
 
-        activeItem.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-        activeItem.setScaleX(0.9f);
-        activeItem.setScaleY(0.9f);
-        activeItem.animate().scaleX(1.1f).scaleY(1.1f).setDuration(400)
-                .setInterpolator(new android.view.animation.OvershootInterpolator(2.0f)).start();
-
+        // Set active item to black
         if (activeItem == navHome) {
             ivHome.setColorFilter(Color.BLACK);
+            tvHomeLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navPlanner) {
             ivPlanner.setColorFilter(Color.BLACK);
+            tvPlannerLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navMusic) {
             ivMusic.setColorFilter(Color.BLACK);
+            tvMusicLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navAbout) {
             ivAbout.setColorFilter(Color.BLACK);
-        } else if (activeItem == navCreate) {
-            ivCreate.setColorFilter(Color.BLACK);
+            tvAboutLabel.setTextColor(Color.BLACK);
         }
     }
 
     private void resetNavItem(LinearLayout item, ImageView iv, TextView tv) {
-        item.setBackground(null);
-        item.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-        item.setScaleX(1.0f);
-        item.setScaleY(1.0f);
         iv.setColorFilter(Color.parseColor("#888888"));
-        if (tv != null)
-            tv.setVisibility(View.GONE);
+        tv.setTextColor(Color.parseColor("#888888"));
     }
 }

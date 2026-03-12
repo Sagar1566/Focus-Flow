@@ -19,9 +19,9 @@ import java.util.Locale;
 public class DashboardActivity extends AppCompatActivity {
 
     private ViewGroup bottomNavMenu;
-    private LinearLayout navHome, navDashboard, navPlanner, navMusic, navAbout;
-    private ImageView ivHome, ivDashboard, ivPlanner, ivMusic, ivAbout;
-    private TextView tvHomeLabel, tvDashboardLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
+    private LinearLayout navHome, navPlanner, navMusic, navAbout;
+    private ImageView ivHome, ivPlanner, ivMusic, ivAbout;
+    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
 
     // Dashboard stat views
     private TextView tvTotalTasks, tvCompletedTasks, tvPendingTasks, tvCompletionRate;
@@ -38,7 +38,6 @@ public class DashboardActivity extends AppCompatActivity {
         bindNavViews();
         bindStatViews();
         setupBottomNavigation();
-        setActiveNavItem(navDashboard);
         loadDashboardStats();
     }
 
@@ -106,17 +105,14 @@ public class DashboardActivity extends AppCompatActivity {
     private void bindNavViews() {
         bottomNavMenu = findViewById(R.id.bottomNavMenu);
         navHome = findViewById(R.id.navHome);
-        navDashboard = findViewById(R.id.navDashboard);
         navPlanner = findViewById(R.id.navPlanner);
         navMusic = findViewById(R.id.navMusic);
         navAbout = findViewById(R.id.navAbout);
         ivHome = findViewById(R.id.ivHome);
-        ivDashboard = findViewById(R.id.ivDashboard);
         ivPlanner = findViewById(R.id.ivPlanner);
         ivMusic = findViewById(R.id.ivMusic);
         ivAbout = findViewById(R.id.ivAbout);
         tvHomeLabel = findViewById(R.id.tvHomeLabel);
-        tvDashboardLabel = findViewById(R.id.tvDashboardLabel);
         tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
         tvMusicLabel = findViewById(R.id.tvMusicLabel);
         tvAboutLabel = findViewById(R.id.tvAboutLabel);
@@ -128,17 +124,16 @@ public class DashboardActivity extends AppCompatActivity {
             new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
                 Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                overridePendingTransition(0, 0);
                 finish();
             }, 120);
         });
-        navDashboard.setOnClickListener(v -> setActiveNavItem(navDashboard));
         navPlanner.setOnClickListener(v -> {
             setActiveNavItem(navPlanner);
             new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-                Intent intent = new Intent(DashboardActivity.this, PlannerActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, AddPlannerActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                overridePendingTransition(0, 0);
                 finish();
             }, 120);
         });
@@ -147,7 +142,7 @@ public class DashboardActivity extends AppCompatActivity {
             new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
                 Intent intent = new Intent(DashboardActivity.this, MusicActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                overridePendingTransition(0, 0);
                 finish();
             }, 120);
         });
@@ -156,7 +151,7 @@ public class DashboardActivity extends AppCompatActivity {
             new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
                 Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                overridePendingTransition(0, 0);
                 finish();
             }, 120);
         });
@@ -166,53 +161,35 @@ public class DashboardActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(0, 0);
         finish();
     }
 
     private void setActiveNavItem(LinearLayout activeItem) {
-        android.transition.TransitionSet set = new android.transition.TransitionSet()
-                .addTransition(new android.transition.ChangeBounds())
-                .addTransition(new android.transition.Fade())
-                .setDuration(350)
-                .setInterpolator(new android.view.animation.OvershootInterpolator(1.2f));
-        android.transition.TransitionManager.beginDelayedTransition(bottomNavMenu, set);
-
+        // Simple color change for active state
         resetNavItem(navHome, ivHome, tvHomeLabel);
-        resetNavItem(navDashboard, ivDashboard, tvDashboardLabel);
         resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
         resetNavItem(navMusic, ivMusic, tvMusicLabel);
         resetNavItem(navAbout, ivAbout, tvAboutLabel);
 
-        activeItem.setBackgroundResource(R.drawable.active_tab_bg);
-        activeItem.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.8f));
-        activeItem.setScaleX(0.9f);
-        activeItem.setScaleY(0.9f);
-        activeItem.animate().scaleX(1.0f).scaleY(1.0f).setDuration(400)
-                .setInterpolator(new android.view.animation.OvershootInterpolator(2.0f)).start();
-
+        // Set active item to black
         if (activeItem == navHome) {
-            ivHome.setColorFilter(Color.WHITE);
-            tvHomeLabel.setVisibility(View.VISIBLE);
-        } else if (activeItem == navDashboard) {
-            ivDashboard.setColorFilter(Color.WHITE);
-            tvDashboardLabel.setVisibility(View.VISIBLE);
+            ivHome.setColorFilter(Color.BLACK);
+            tvHomeLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navPlanner) {
-            ivPlanner.setColorFilter(Color.WHITE);
-            tvPlannerLabel.setVisibility(View.VISIBLE);
+            ivPlanner.setColorFilter(Color.BLACK);
+            tvPlannerLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navMusic) {
-            ivMusic.setColorFilter(Color.WHITE);
-            tvMusicLabel.setVisibility(View.VISIBLE);
+            ivMusic.setColorFilter(Color.BLACK);
+            tvMusicLabel.setTextColor(Color.BLACK);
         } else if (activeItem == navAbout) {
-            ivAbout.setColorFilter(Color.WHITE);
-            tvAboutLabel.setVisibility(View.VISIBLE);
+            ivAbout.setColorFilter(Color.BLACK);
+            tvAboutLabel.setTextColor(Color.BLACK);
         }
     }
 
     private void resetNavItem(LinearLayout item, ImageView iv, TextView tv) {
-        item.setBackground(null);
-        item.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0.8f));
         iv.setColorFilter(Color.parseColor("#888888"));
-        tv.setVisibility(View.GONE);
+        tv.setTextColor(Color.parseColor("#888888"));
     }
 }

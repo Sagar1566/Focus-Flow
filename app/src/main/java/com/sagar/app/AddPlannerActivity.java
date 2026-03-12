@@ -16,9 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddPlannerActivity extends AppCompatActivity {
 
     private ViewGroup bottomNavMenu;
-    private LinearLayout navHome, navPlanner, navMusic, navAbout, navCreate;
-    private ImageView ivHome, ivPlanner, ivMusic, ivAbout, ivCreate;
-    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel, tvCreateLabel;
+    private LinearLayout navHome, navPlanner, navMusic, navAbout;
+    private ImageView ivHome, ivPlanner, ivMusic, ivAbout;
+    private TextView tvHomeLabel, tvPlannerLabel, tvMusicLabel, tvAboutLabel;
     private RelativeLayout btnBack, btnSave;
     private android.widget.EditText etTourAbout, etRemarks, etDate;
     private FirebaseHelper firebaseHelper;
@@ -95,19 +95,16 @@ public class AddPlannerActivity extends AppCompatActivity {
         navPlanner = findViewById(R.id.navPlanner);
         navMusic = findViewById(R.id.navMusic);
         navAbout = findViewById(R.id.navAbout);
-        navCreate = findViewById(R.id.navCreate);
 
         ivHome = findViewById(R.id.ivHome);
         ivPlanner = findViewById(R.id.ivPlanner);
         ivMusic = findViewById(R.id.ivMusic);
         ivAbout = findViewById(R.id.ivAbout);
-        ivCreate = findViewById(R.id.ivCreate);
 
         tvHomeLabel = findViewById(R.id.tvHomeLabel);
         tvPlannerLabel = findViewById(R.id.tvPlannerLabel);
         tvMusicLabel = findViewById(R.id.tvMusicLabel);
         tvAboutLabel = findViewById(R.id.tvAboutLabel);
-        tvCreateLabel = findViewById(R.id.tvCreateLabel);
 
         btnBack = findViewById(R.id.btnBack);
         btnSave = findViewById(R.id.btnSave);
@@ -139,14 +136,6 @@ public class AddPlannerActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
             finish();
         });
-
-        navCreate.setOnClickListener(v -> {
-            setActiveNavItem(navCreate);
-            Intent intent = new Intent(AddPlannerActivity.this, PlannerActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
-            finish();
-        });
     }
 
     private void setActiveNavItem(LinearLayout activeItem) {
@@ -162,7 +151,6 @@ public class AddPlannerActivity extends AppCompatActivity {
         resetNavItem(navPlanner, ivPlanner, tvPlannerLabel);
         resetNavItem(navMusic, ivMusic, tvMusicLabel);
         resetNavItem(navAbout, ivAbout, tvAboutLabel);
-        resetNavItem(navCreate, ivCreate, tvCreateLabel);
 
         activeItem.setLayoutParams(new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
@@ -180,8 +168,6 @@ public class AddPlannerActivity extends AppCompatActivity {
             ivMusic.setColorFilter(Color.BLACK);
         } else if (activeItem == navAbout) {
             ivAbout.setColorFilter(Color.BLACK);
-        } else if (activeItem == navCreate) {
-            ivCreate.setColorFilter(Color.BLACK);
         }
     }
 
