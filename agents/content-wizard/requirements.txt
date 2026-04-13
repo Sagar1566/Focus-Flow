@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-multipart
+pypdf
+huggingface_hub
+edge-tts
+asyncionest_asyncio
+
