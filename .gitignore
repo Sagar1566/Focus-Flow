@@ -11,3 +11,5 @@ local.properties
 gradle-8.0/
 .temp/
 .knownPackages/
+
+# Minor updates
