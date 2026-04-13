@@ -56,53 +56,53 @@ Below are app UI screenshots grouped by feature area. Images are loaded directly
 
 `img1.png` (Splash screen)
 
-![Splash Screen](readmeimges/img1.png)
+<img src="readmeimges/img1.png" alt="Splash Screen" width="280" />
 
 ### Dashboard Section
 
 `dashbaord.png`
 
-![Dashboard Screen 1](readmeimges/dashbaord.png)
+<img src="readmeimges/dashbaord.png" alt="Dashboard Screen 1" width="280" />
 
 `dashboard2.png`
 
-![Dashboard Screen 2](readmeimges/dashboard2.png)
+<img src="readmeimges/dashboard2.png" alt="Dashboard Screen 2" width="280" />
 
 ### AI Scheduler Section
 
 `AI_Sheducle_planner.png`
 
-![AI Scheduler Planner](readmeimges/AI_Sheducle_planner.png)
+<img src="readmeimges/AI_Sheducle_planner.png" alt="AI Scheduler Planner" width="280" />
 
 `AI_Shedulce_generator.png`
 
-![AI Scheduler Generator](readmeimges/AI_Shedulce_generator.png)
+<img src="readmeimges/AI_Shedulce_generator.png" alt="AI Scheduler Generator" width="280" />
 
 ### RAG Section
 
 `RAG.png`
 
-![RAG Main Screen](readmeimges/RAG.png)
+<img src="readmeimges/RAG.png" alt="RAG Main Screen" width="280" />
 
 `Features_from_rag.png`
 
-![RAG Features](readmeimges/Features_from_rag.png)
+<img src="readmeimges/Features_from_rag.png" alt="RAG Features" width="280" />
 
 ### Profile Section
 
 `Profile.png`
 
-![Profile Screen](readmeimges/Profile.png)
+<img src="readmeimges/Profile.png" alt="Profile Screen" width="280" />
 
 ### YouTube Playlist Tracker Section
 
 `youtubeplaylist_tracker.png`
 
-![YouTube Playlist Tracker](readmeimges/youtubeplaylist_tracker.png)
+<img src="readmeimges/youtubeplaylist_tracker.png" alt="YouTube Playlist Tracker" width="280" />
 
 `youtube-playlist_interface.png`
 
-![YouTube Playlist Interface](readmeimges/youtube-playlist_interface.png)
+<img src="readmeimges/youtube-playlist_interface.png" alt="YouTube Playlist Interface" width="280" />
 
 ## Tech Stack
 
